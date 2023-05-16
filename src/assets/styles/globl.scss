@@ -1,0 +1,80 @@
+// 页面容器
+.page-container {
+  height: 100%;
+  max-width: 1024px;
+  padding: 0 30px;
+  margin: auto;
+}
+
+// 列等分布局
+.col {
+  &-2 {
+    width: calc((100% - 18px) / 2);
+    margin-right: 18px;
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+  &-3 {
+    width: calc((100% - 36px) / 3);
+    margin-right: 18px;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+  &-4 {
+    width: calc((100% - 54px) / 4);
+    margin-right: 18px;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+  &-5 {
+    width: calc((100% - 72px) / 5);
+    margin-right: 18px;
+    &:nth-child(5n) {
+      margin-right: 0;
+    }
+  }
+}
+
+// 字体超出部分省略号
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &-2-lines, 
+  &-3-lines {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  &-2-lines {
+    -webkit-line-clamp: 2;
+  }
+  &-3-lines {
+    -webkit-line-clamp: 3;
+  }
+}
+
+.text-link:hover {
+  color: #000 !important;
+  cursor: pointer;
+}
+
+
+/*定义整个滚动条高宽及背景：高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar
+{
+  width:9px;
+}
+/*定义滑块：内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+  border-radius:10px;
+  background-color:#e0e0e0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color:#d6d6d6;
+}
