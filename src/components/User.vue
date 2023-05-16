@@ -54,8 +54,17 @@ const userListStyle = ref('');
 
 onMounted(() => {
 	document.addEventListener('click', function(e) {
-		showUserList.value = false
+		if (e.target.className === "qd-btn") {
+			showUserList.value = false;
+		}
 	}, false);
+
+	window.addEventListener("storage", e => {
+		if (e.key === "loginState") {
+			store.commit('SET_USER_INFO', JSON.parse(localStorage.getItem('vuex')).userInfo);
+			localStorage.removeItem('loginState')
+		}
+	})
 })
 
 const userInfo = computed({
@@ -73,10 +82,10 @@ const onUserClick = async () => {
 
 		userListStyle.value = `left:${ caretRightRef.value.offsetLeft + 20 }px`;
 		showUserList.value = !showUserList.value
-		return
+	} else {
+		electronAPI.openLoginWin();
 	}
 	
-	electronAPI.openLoginWin();
 }
 
 const logout = () => {
@@ -117,7 +126,7 @@ const logout = () => {
 	}
 
 	.user-list {
-		display: none;
+		// display: none;
 		position: absolute;
     top: 8px;
 		width: 320px;
