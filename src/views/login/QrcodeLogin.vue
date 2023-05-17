@@ -44,7 +44,6 @@ async function getLoginStatus(cookie = '') {
   let res = await getLoginStateService({ timestamp: Date.now() }, { cookie });
   if (res.profile) {
     store.commit('SET_USER_INFO', res.profile);
-	  localStorage.setItem("loginState", true);
 		electronAPI.closeLoginWin();
   }
 }

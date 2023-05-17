@@ -1,7 +1,8 @@
-import { ipcMain, BrowserWindow } from "electron";
+import { ipcMain, BrowserWindow, MessageChannelMain } from "electron";
 import createLoginWindow from "./windows/loginWindow";
 
 let loginWin;
+
 export default function () {
   ipcMain.handle("on-open-loginWin", (event, data) => {
     if (loginWin) {
@@ -20,6 +21,7 @@ export default function () {
   });
 
   ipcMain.handle("on-close-loginWin", () => {
+    global.win.webContents.send('update-counter', 'ok')
     loginWin && loginWin.close()
   })
 }

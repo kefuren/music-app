@@ -11,17 +11,7 @@ export default createStore({
   actions: actions,
   getters: getters,
   modules: {},
-  plugins: [    
-    createPersistedState({
-      reducer(val) {
-        return {
-          currentPlaying: val.currentPlaying,
-          source: val.source,
-          currentTime: val.currentTime,
-          volume: val.volume,
-          userInfo: val.userInfo
-        }      
-      }
-    })
-  ],
+  plugins: [createPersistedState({
+    paths: ['userInfo', 'currentPlaying', 'source', 'volume', 'currentTime', 'searchHistory']
+  })],
 })

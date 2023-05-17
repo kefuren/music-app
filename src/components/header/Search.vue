@@ -3,7 +3,7 @@
     <div class="search">
       <template v-if="!searchWord">
         <div class="search-history" v-if="searchHistory.length">
-          <div class="title">搜索历史<i class="iconfont icon-lajitong text-link"></i></div>
+          <div class="title">搜索历史<i class="iconfont icon-lajitong text-link" @click="clearSearch"></i></div>
           <div class="search-tags flex">
             <div class="tag-item" v-for="item in searchHistory" :key="item.searchWord">
               {{ item.searchWord }}
@@ -120,6 +120,10 @@ const search = debounce(async (keyword) => {
 
 const onClick = (item) => {
   emits('onClick', item)
+}
+
+const clearSearch = () => {
+  store.commit('SET_SEARCH_HISTORY', []);
 }
 
 function highlight(text, keyword) {

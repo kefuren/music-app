@@ -54,3 +54,8 @@ export function getCatlistService (limit, cat) {
 export function getHotService () {
 	return httpGet('/playlist/hot')
 }
+
+// 更新歌单 登录后调用此接口,可以更新用户歌单
+export function updatePlaylistService (id) {
+	return httpGet('/playlist/update?id=' + id + '&name=新歌单&desc=描述&tags=全部')
+}

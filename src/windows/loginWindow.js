@@ -4,8 +4,8 @@ export const LOAD_URL = `${ ACHEME }://./index.html`;
 const path = require('path')
 
 const miniWinURL = process.env.NODE_ENV === "development"
-                                          ? `http://localhost:8080/login`
-                                          : `${ LOAD_URL }/login`;
+                                          ? `http://localhost:8080/#login`
+                                          : `${ LOAD_URL }/#login`;
 let loginWin;
 const createLoginWindow = function(BrowserWindow) {
   let obj = {
@@ -15,7 +15,7 @@ const createLoginWindow = function(BrowserWindow) {
     // parent: global.win,
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(__dirname, '../src/preload.js'),
+      preload: path.join(__dirname, 'preload.js')
     },
   };
   loginWin = new BrowserWindow(obj);

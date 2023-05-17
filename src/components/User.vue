@@ -45,6 +45,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { getUserDetailService } from '../services/user'
+import { updatePlaylistService } from '../services/playlist'
 import { useStore } from 'vuex'
 
 const store = useStore();
@@ -53,18 +54,17 @@ const showUserList = ref(false);
 const userListStyle = ref('');
 
 onMounted(() => {
+	window.electronAPI.handleCounter((event, value) => {
+		if (value == 'ok') {
+			store.commit('SET_USER_INFO', JSON.parse(localStorage.getItem('vuex')).userInfo);
+		}
+	})
+
 	document.addEventListener('click', function(e) {
-		if (e.target.className === "qd-btn") {
+		if (e.target.className !== "qd-btn") {
 			showUserList.value = false;
 		}
 	}, false);
-
-	window.addEventListener("storage", e => {
-		if (e.key === "loginState") {
-			store.commit('SET_USER_INFO', JSON.parse(localStorage.getItem('vuex')).userInfo);
-			localStorage.removeItem('loginState')
-		}
-	})
 })
 
 const userInfo = computed({

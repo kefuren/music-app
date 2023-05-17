@@ -38,6 +38,10 @@ export default {
     state.playInfoShow = show
   },
   SET_SEARCH_HISTORY(state, payload) {
+    if (Object.prototype.toString.call(payload) === '[object Array]') {
+      state.searchHistory = [];
+      return
+    }
     const index = state.searchHistory.findIndex(item => item.searchWord == payload.searchWord)
     if (index == -1) {
       state.searchHistory.push(payload)

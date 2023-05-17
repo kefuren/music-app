@@ -65,9 +65,9 @@
               v-html="data.description"
               v-if="data.description"
             ></span>
-            <div style="flex: 1;text-align: right;">
+            <!-- <div> -->
               <i :class="descIconClass" @click="isEllipsis = !isEllipsis"></i>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
     </div>
@@ -190,8 +190,10 @@ function tagsFormat(tags) {
       }
     }
     .album-desc {
+      width: 100%;
       .desc-text {
         width: 400px;
+        flex: 1;
         line-height: 1.5rem;
         color: #666;
       }

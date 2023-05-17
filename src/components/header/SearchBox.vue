@@ -7,8 +7,8 @@
       v-model="keyword"
       @input="searchInput"
       @keydown.enter="searchKeydown"
-      @focus="setSearchShow($event, true)"
       @blur="setSearchShow($event, false)"
+      @click="setSearchShow($event, true)"
       ref="searchInputRef"
     />
     <i
@@ -47,7 +47,7 @@ const searchInput = (e) => {
 const clearSearchInput = () => {
   keyword.value = "";
   searchInputRef.value.focus();
-  setSearchShow(false)
+  setSearchShow(false);
 };
 
 const searchKeydown = () => {

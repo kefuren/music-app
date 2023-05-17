@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 
 import './assets/styles/common.scss'
-import './assets/styles/globl.scss'
+import './assets/styles/global.scss'
 import './assets/styles/flex.scss'
 import './assets/styles/positioning.scss'
 import './assets/styles/typography.scss'
