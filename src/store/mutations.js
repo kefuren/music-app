@@ -16,6 +16,9 @@ export default {
   [ SET_ACTIVE_MENU ]: (state, payload) => {
     state.activeMenu = payload;
   },
+  SET_AUDIO_REF(state, audio) {
+    state.audioRef = audio;
+  },
   SET_CURRENT_PLAYING(state, payload) {
     state.currentPlaying = payload;
   },

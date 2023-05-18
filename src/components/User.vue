@@ -61,9 +61,7 @@ onMounted(() => {
 	})
 
 	document.addEventListener('click', function(e) {
-		if (e.target.className !== "qd-btn") {
-			showUserList.value = false;
-		}
+		showUserList.value = false;
 	}, false);
 })
 

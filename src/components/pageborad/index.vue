@@ -1,18 +1,23 @@
 <template>
-  <div v-if="true">
-    <Header />
-    <SideBar />
-    <div class="page-board">
-      <div class="page-board-container">
-        <router-view></router-view>
-      </div>
+  <div>
+    <div v-show="isFullScreen">
+      <FullScreenPage />
     </div>
-    <Footer />
-  </div>
-  <div v-else>
-    <Header />
-    <div class="">无侧边栏显示</div>
-    <Footer />
+    <div v-show="!hideSide && !isFullScreen">
+      <Header />
+      <SideBar />
+      <div class="page-board">
+        <div class="page-board-container">
+          <router-view></router-view>
+        </div>
+      </div>
+      <Footer />
+    </div>
+    <!-- <div v-show="hideSide">
+      <Header />
+      <div class="">无侧边栏显示</div>
+      <Footer />
+    </div> -->
   </div>
 </template>
 
@@ -22,8 +27,22 @@ import Header from '@/components/header'
 import SideBar from '@/components/sidebar'
 // import PageBoard from '@/components/pageborad'
 import Footer from '@/components/footer'
+import FullScreenPage from '@/components/FullScreenPage.vue'
+import { onMounted, ref } from 'vue';
 
 const store = useStore();
+
+const isFullScreen = ref(false);
+const hideSide = ref(false);
+
+onMounted(() => {
+  window.electronAPI.enterFullScreen(() => {
+    isFullScreen.value = true
+  })
+  window.electronAPI.leaveFullScreen(() => {
+    isFullScreen.value = false
+  })
+})
 </script>
 
 <style lang="scss">

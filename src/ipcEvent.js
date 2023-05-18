@@ -24,4 +24,12 @@ export default function () {
     global.win.webContents.send('update-counter', 'ok')
     loginWin && loginWin.close()
   })
+
+  global.win.on('enter-full-screen', function (event) {
+    global.win.webContents.send('enter-full-screen')
+  });
+  
+  global.win.on('leave-full-screen', function (event) {
+    global.win.webContents.send('leave-full-screen')
+  });
 }

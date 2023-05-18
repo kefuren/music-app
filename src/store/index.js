@@ -12,6 +12,14 @@ export default createStore({
   getters: getters,
   modules: {},
   plugins: [createPersistedState({
-    paths: ['userInfo', 'currentPlaying', 'source', 'volume', 'currentTime', 'searchHistory']
+    paths: [
+      // 'playState', 
+      'userInfo', 
+      'currentPlaying', 
+      'source', 
+      'volume', 
+      'currentTime', 
+      'searchHistory'
+    ]
   })],
 })

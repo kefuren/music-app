@@ -40,7 +40,7 @@ async function createWindow() {
     // Load the index.html when not in development
     global.win.loadURL('app://./index.html')
   }
-  
+
   initIpcEvent();
 }
 

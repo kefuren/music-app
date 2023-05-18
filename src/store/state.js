@@ -7,6 +7,7 @@ export default {
 	tabList: [],
 	menuList: menus,
 	// 播放信息
+	audioRef: null,
 	currentPlaying: {},
 	playState: false,
 	source: '',

@@ -144,6 +144,8 @@ onMounted(() => {
   audioRef.value.addEventListener('canplay', _canplay, false);
   audioRef.value.addEventListener('ended', _ended, false);
 
+  store.commit('SET_AUDIO_REF', audioRef)
+
   if (localStorage.getItem('vuex') !== null) {
     let store = JSON.parse(localStorage.getItem('vuex'));
     setVolume(Number(store.volume), true);
@@ -151,7 +153,6 @@ onMounted(() => {
     audioRef.value.currentTime = currentTime.value;
     audioRef.value.pause();
   }
-
 })
 
 const playAudio = () => {
