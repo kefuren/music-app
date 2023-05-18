@@ -158,11 +158,11 @@ function getLyric(id) {
   height: 115px;
   // overflow: hidden;
   text-align: center;
-  font-size: 16;
+  font-size: 16px;
   overflow-y: auto;
   p {
     color: #f5f5f5;
-    line-height: 2.6rem;
+    line-height: 2.4rem;
   }
   .active {
     font-size: 20px;
