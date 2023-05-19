@@ -20,7 +20,8 @@ async function createWindow() {
     height: 670,
     minWidth: 1000,
     minHeight: 670,
-    titleBarStyle: 'hidden',
+    // titleBarStyle: 'hidden',
+    frame: false,
     webPreferences: {
       
       // Use pluginOptions.nodeIntegration, leave this alone
@@ -56,7 +57,11 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  if (BrowserWindow.getAllWindows().length === 0) { 
+    createWindow()
+  } else {
+    global.win.show()
+  }
 })
 
 // This method will be called when Electron has finished

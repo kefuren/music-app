@@ -46,6 +46,16 @@ watch(() => router.currentRoute.value.fullPath, (newVal, oldVal) => {
   hasNext.value = (window.history.length - window.history.state.position) !== 1;
 })
 
+const windowClose = () => {
+  window.electronAPI.windowClose()
+}
+const windowMin = () => {
+  window.electronAPI.windowMin()
+}
+const windowMax = () => {
+  window.electronAPI.windowMax()
+}
+
 const handlePrevious = () => {
   router.go(-1);
 }
@@ -60,6 +70,35 @@ const setPlayInfoShow = () => {
 </script>
 
 <style lang="scss" scoped>
+.control-btns {
+  width: 100%;
+  height: 100%;
+}
+.traffic-light {
+  margin-top: 10px;
+}
+.round {
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  text-align: center;
+  line-height: 8px;
+  border-radius: 50%;
+  i {
+    font-size: 10px;
+    font-weight: bold;
+  }
+}
+.close-btn {
+  background: #ec6a5e;
+}
+.mini-btn {
+  background: #f5c04f;
+}
+.max-btn {
+  background: #62c755;
+}
+
 .allow-group {
   float: right;
   display: flex;

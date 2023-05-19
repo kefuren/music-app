@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
     cursor: pointer;
     transition: all .3s linear;
     &.item--active {
-      left: 140px;
+      left: calc((100% - 450px) / 2);
       top: 40px;
       transform: scale(1.2);
       z-index: 3;
@@ -202,7 +202,7 @@ onBeforeUnmount(() => {
       top: 40px;
     }
     &.item--level-2.right {
-      left: 280px;
+      left: calc(100% - 450px);
       top: 40px;
     }
     &.item--level-3 {

@@ -91,6 +91,7 @@ const checkedItem = (item) => {
     font-size: 12px;
     box-sizing: border-box;
     background: transparent;
+    -webkit-app-region: no-drag;
   }
 
   input::placeholder {

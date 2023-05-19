@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TrafficLight />
     <div v-show="isFullScreen">
       <FullScreenPage />
     </div>
@@ -23,6 +24,7 @@
 
 <script setup>
 import { useStore } from 'vuex'
+import TrafficLight from '../TrafficLight.vue'
 import Header from '@/components/header'
 import SideBar from '@/components/sidebar'
 // import PageBoard from '@/components/pageborad'
@@ -43,6 +45,9 @@ onMounted(() => {
     isFullScreen.value = false
   })
 })
+
+
+
 </script>
 
 <style lang="scss">
@@ -60,4 +65,5 @@ onMounted(() => {
   width: 100%;
   overflow-y: auto;
 }
+
 </style>

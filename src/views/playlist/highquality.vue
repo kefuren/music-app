@@ -10,7 +10,7 @@
               <span>{{ numberFormat(item.playCount) }}</span>
             </div>
 
-            <img :src="item.coverImgUrl" alt="">
+            <img v-lazy="item.coverImgUrl" :key="item.coverImgUrl">
 
             <div class="highquality absolute-top" v-if="item.highQuality">
               <i class="iconfont icon-icon-test absolute"></i>

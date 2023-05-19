@@ -10,7 +10,7 @@
     >
       <div class="item-container flex items-center">
         <div class="item-avatar relative-position">
-          <img class="" :src="item.coverUrl" alt="">
+          <img class="" v-lazy="item.coverUrl" :key="item.coverUrl" alt="">
         </div>
         <div class="item-main">
           <p class="name ellipsis-2-lines">

@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { useStore } from 'vuex'
 import { useAnimate } from '../hooks/useAnimate'
 import { getLyricService } from '../services/song'
@@ -50,16 +50,15 @@ onMounted(() => {
     stop();
   }
 
-  setTimeout(() => {
-    audio && audio.value.addEventListener('timeupdate', function() {
+  nextTick(() => {
+    audio.value.addEventListener('timeupdate', function() {
       store.commit('SET_CURRENT_TIME', this.currentTime)
       if(lrcObj.value[ Math.floor(this.currentTime) ] != undefined) {
         // console.log(lrcObj.value[ Math.floor(this.currentTime) ])
         curLyrics.value = Math.floor(this.currentTime);
       }
     })
-  }, 40)
-
+  })
 })
 
 watch(

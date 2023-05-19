@@ -32,4 +32,27 @@ export default function () {
   global.win.on('leave-full-screen', function (event) {
     global.win.webContents.send('leave-full-screen')
   });
+
+  ipcMain.on('window-min', function () {
+    if(global.win.isFullScreen()){
+      global.win.setFullScreen(false);
+      setTimeout(() => {
+        global.win.minimize();
+      }, 800)
+    } else {
+      global.win.minimize();
+    }
+  })
+
+  ipcMain.on('window-max', function () {
+    if(!global.win.isFullScreen()){
+      global.win.setFullScreen(true)
+    } else {
+      global.win.setFullScreen(false)
+    }
+  })
+
+  ipcMain.on('window-close', function () {
+    global.win.hide();
+  })
 }

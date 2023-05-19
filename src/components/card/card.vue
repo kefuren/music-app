@@ -13,7 +13,10 @@
         <i class="iconfont icon-24gl-play"></i>
         <span>{{ numberFormat(item.playCount) }}</span>
       </div>
-      <img :src="item.sPicUrl || item.picUrl || item.coverImgUrl" alt="" srcset="">
+      <img 
+        v-lazy="item.sPicUrl || item.picUrl || item.coverImgUrl"
+        :key="item.sPicUrl || item.picUrl || item.coverImgUrl"
+      >
       <div 
         v-if="showPlayBtn && item.hover"
         class="card__play-btn absolute" 

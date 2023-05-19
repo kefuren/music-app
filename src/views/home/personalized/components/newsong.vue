@@ -11,7 +11,7 @@
     >
       <div class="item-container flex items-center">
         <div class="item-avatar" @click="play(item)">
-          <img :src="item.picUrl" alt="">
+          <img v-lazy="item.picUrl" :key="item.picUrl" alt="">
           <div class="play-btn absolute-center">
             <i class="iconfont icon-bofang1"></i>
           </div>

@@ -164,8 +164,4 @@ const darkMode = async (color, index) => {
     }
   }
 }
-
-input {
-  -webkit-app-region: no-drag;
-}
 </style>

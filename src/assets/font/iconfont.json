@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1415517",
+      "name": "缩小",
+      "font_class": "suoxiao",
+      "unicode": "e839",
+      "unicode_decimal": 59449
+    },
+    {
       "icon_id": "691110",
       "name": "勾",
       "font_class": "gou",
