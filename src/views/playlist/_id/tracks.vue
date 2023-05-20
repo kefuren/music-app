@@ -85,7 +85,7 @@ import {
 } from '@/services/playlist'
 
 import { fillZero, dateFormat } from '@/utils/api'
-import { onBeforeRouteUpdate } from "vue-router";
+import Toast from '../../../lib/MyUI/Toast';
 
 const props = defineProps({
   data: {
@@ -118,7 +118,7 @@ function checkMusic(id) {
   return new Promise(async (resolve, reject) => {
     const res = await checkMusicService(id);
     if (!res.success) {
-      alert(res.message)
+      Toast(res.message)
     }
     resolve(res.success);
   })

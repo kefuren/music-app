@@ -31,6 +31,7 @@ import {
   getLoginStateService
 } from '@/services/login'
 
+import { Toast } from '@/lib/MyUI'
 
 const store = useStore();
 const router = useRouter();
@@ -81,9 +82,10 @@ async function login() {
       // 这一步会返回cookie
       clearInterval(timer);
       timer = null;
-      alert('授权登录成功');
-      await getLoginStatus(statusRes.cookie);
-      localStorage.setItem('cookie', statusRes.cookie);
+			Toast('授权登录成功').then(() => {
+				getLoginStatus(statusRes.cookie);
+				localStorage.setItem('cookie', statusRes.cookie);
+			});
     }
   }, 3000)
 }

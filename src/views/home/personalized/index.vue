@@ -20,6 +20,13 @@
       <div class="lodding flex justify-center items-center" v-else>
         <span>正在为您生成个性化设置...</span>
       </div>
+
+      <div class="sort-bar column items-center justify-center">
+        <p class="">现在可以根据个人喜好，自由调整首页栏目顺序啦~</p>
+        <div class="btn" @click="showBarList">调整栏目顺序</div>
+        <SortBar :list="NAVS" v-model="isShowBarList" />
+      </div>
+
     </div>
 </template>
 
@@ -42,6 +49,7 @@ import dj from './components/dj.vue'
 
 import Carousel from './components/carousel.vue'
 import LinkTitle from '@/components/LinkTitle.vue'
+import SortBar from './components/SortBar.vue'
 
 const NAVS = [
   {
@@ -81,6 +89,7 @@ const state = reactive({
   mv: [],
   dj: [],
 })
+const isShowBarList = ref(false);
 
 onMounted(async () => {
   getDatas(
@@ -120,6 +129,10 @@ async function getDatas(requests) {
   )
 }
 
+const showBarList = () => {
+  isShowBarList.value = true
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -127,5 +140,22 @@ async function getDatas(requests) {
   width: 100%;
   height: 200px;
   font-size: 14px;
+}
+
+.sort-bar {
+  font-size: 12px;
+  height: 100px;
+  padding: 40px 0;
+  box-sizing: content-box;
+  p {
+    color: #999;
+  }
+  .btn {
+    margin-top: 15px;
+    border: solid 1px #c3473a;
+    border-radius: 30px;
+    padding: 5px 20px;
+    color: #c3473a;
+  }
 }
 </style>

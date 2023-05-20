@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import VueLazyLoad from 'vue-lazyload'
 
+// console.log(MyUI)
+
 import './assets/styles/common.scss'
 import './assets/styles/global.scss'
 import './assets/styles/flex.scss'
