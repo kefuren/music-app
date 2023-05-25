@@ -6,7 +6,7 @@
         :key="item.id"
         :item="item"
         :showPlayBtn="false"
-        @onClick="onCardClick(item)"
+        @onClick="goMvDetail(item)"
       >
         <template #cardDesc>
             <p>{{ item.name }}</p>
@@ -20,12 +20,18 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { useRouter } from 'vue-router'
 import Card from '@/components/card/card.vue'
 
 const props = defineProps({
   list: Array
 })
+
+const router = useRouter();
+
+const goMvDetail = (item) => {
+  router.push(`/mv/${item.id}`)
+}
 
 </script>
 

@@ -60,7 +60,7 @@ const changeTab = (item) => {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 2;
+	z-index: 4;
 	height: 50px;
 	width: 100%;
 	background: #F9F9F9;

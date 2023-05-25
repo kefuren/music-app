@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-export function useAnimate() {
+export function useRotate() {
   let requestId = 0,
     animationStartTime = 0,
     stoppedAt = 0;

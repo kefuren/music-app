@@ -6,7 +6,7 @@ export function getRecommendPlaylistService(params) {
 }
 
 // 歌单详情 
-export function getPersonalizedDetailService (id) {
+export function getPlaylistDetailService (id) {
 	return httpGet('/playlist/detail?id=' + id)
 }
 

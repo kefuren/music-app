@@ -23,7 +23,6 @@ router.beforeEach((to, from) => {
   // ...
   // 返回 false 以取消导航
   if (to.fullPath != '/login') {
-
     const currentMenu = to.matched[1].path;
     let tabList = [];
     store.state.menuList.forEach((item) => {
@@ -31,7 +30,7 @@ router.beforeEach((to, from) => {
         tabList = item
       } else {
         item.topMenus.forEach(citem => {
-          if (citem.path.match(currentMenu)) {
+          if (to.name !== 'mv-id' && citem.path.match(currentMenu) && !citem.hidden) {
             tabList = item
           }
         })

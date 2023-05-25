@@ -103,6 +103,19 @@ const routes = [
         },
       },
       {
+        path: '/mv/:id',
+        name: 'mv-id',
+        component: () => import('@/views/video/_id/mv.vue'),
+      },
+      {
+        path: '/mv-list',
+        name: 'mv-list',
+        component: () => import('../views/video/components/mv-list.vue'),
+        meta: {
+          title: "mv-list"
+        },
+      },
+      {
         path: '/follows',
         name: 'Follows',
         component: () => import('../views/follows/index.vue'),

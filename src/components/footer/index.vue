@@ -9,6 +9,7 @@
     <!-- 播放控制条 -->
     <div class="control-bar flex justify-between items-center">  
       <div 
+        v-if="source.url"
         class="progress-bar" 
         ref="progressBarRef" 
         @click="progressBarClick"
@@ -42,7 +43,7 @@
               </p>
             </div>
             <div class="time-area">
-              <span class="duration">{{ timeFormat(currentTime) }}</span>
+              <span class="duration">{{ secondToDate(currentTime) }}</span>
               <span>&nbsp;/ {{ dateFormat(currentPlaying.duration, 'mm:ss') }}</span>
             </div>
           </div>
@@ -66,8 +67,38 @@
         <i class="control next iconfont icon-zuihouyiyemoyexiayishou"></i>
         <i class="iconfont icon-fenxiang"></i>
       </div>
-      <div class="setting-area flex justify-end">
-        <div class="setting-btns flex items-center">
+      <div class="setting-area flex justify-end ralative-position">
+        <div class="setting-btns flex items-center justify-end">
+          <div class="play-list-btn" @click="playlistShow = !playlistShow">
+            <i class="iconfont icon-24gf-playlist3" :style="`color:${playlistShow ? 'red' : ''}`"></i>
+            <!-- 播放列表 -->
+            <div class="play-list-area absolute" v-if="playlistShow">
+              <div class="title">
+                <h3>当前播放</h3>
+                <div class="flex justify-between" style="font-size: 12px; padding: 10px 0; border-bottom: solid 1px #f5f5f5;">
+                  <span class="play-list-count" style="color: #ccc">总{{ playList.length || 0 }}首</span>
+                  <div class="play-list-btns flex">
+                    <div class="btn subscribe-btn text-link"><i class="iconfont icon-xinjianwenjianjia"></i> 收藏全部</div>
+                    <div class="btn clear-btn">清空列表</div>
+                  </div>
+                </div>
+              </div>
+              <div class="content">
+                <table>
+                  <tbody>
+                    <tr
+                      v-for="(item, index) in playList"
+                      :key="item.id"
+                    >
+                      <td>
+                        <span :class="{'play-text': item.play}">{{ item.name }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
           <div 
             class="volume-area" 
             ref="volumeRef" 
@@ -97,9 +128,14 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { 
+  computed,
+  onMounted, 
+  ref, 
+  watch 
+} from 'vue';
 import { useStore } from 'vuex'
-import { dateFormat } from '@/utils/api'
+import { dateFormat, secondToDate } from '@/utils/api'
 
 const store = useStore();
 const currentPlaying = computed(() => store.state.currentPlaying)
@@ -139,12 +175,16 @@ let t = null;
 // 播放进度条
 let pt = null;
 
+const playlistShow = ref(false)
+// const playListCount = computed(() => currentPlaying.value.playList.length)
+const playList = computed(() => currentPlaying.value.playList)
+
 onMounted(() => {
   audioRef.value.addEventListener('playing', _playing, false);
   audioRef.value.addEventListener('canplay', _canplay, false);
   audioRef.value.addEventListener('ended', _ended, false);
 
-  store.commit('SET_AUDIO_REF', audioRef)
+  store.commit('SET_AUDIO_REF', audioRef);
 
   if (localStorage.getItem('vuex') !== null) {
     let store = JSON.parse(localStorage.getItem('vuex'));
@@ -153,6 +193,10 @@ onMounted(() => {
     audioRef.value.currentTime = currentTime.value;
     audioRef.value.pause();
   }
+
+  document.addEventListener('click', function() {
+    // playlistShow.value = false
+  }, false)
 })
 
 const playAudio = () => {
@@ -324,76 +368,10 @@ function slideVolumeBar(e) {
   }
 }
 
-function timeFormat(second) {
-  let h = parseInt(second / 3600),
-      m = parseInt(parseInt(second % 3600) / 60),
-      s = parseInt(parseInt(second % 3600) % 60),
-      time = '';
-
-  if (h == 0) {
-    if (m >= 10) {
-      if (s >= 10) {
-        time = m + ':' + s;
-      } else {
-        time = m + ':0' + s;
-      }
-    } else {
-      if (s >= 10) {
-        time = '0' + m + ':' + s;
-      } else {
-        time = '0' + m + ':0' + s;
-      }
-    }
-  } else {
-    if (h < 10) {
-      if (m >= 10) {
-        if (s >= 10) {
-          time = '0' + h + ':' + m + ':' + s;
-        } else {
-          time = '0' + h + ':' + m + ':0' + s;
-        }
-      } else {
-        if (s >= 10) {
-          time = '0' + h + ':0' + m + ':' + s;
-        } else {
-          time = '0' + h + ':0' + m + ':0' + s;
-        }
-      }
-    } else {
-      if (m >= 10) {
-        if (s >= 10) {
-          time = h + ':' + m + ':' + s;
-        } else {
-          time = h + ':' + m + ':0' + s;
-        }
-      } else {
-        if (s >= 10) {
-          time = h + ':0' + m + ':' + s;
-        } else {
-          time = h + ':0' + m + ':0' + s;
-        }
-      }
-    }
-  }
-  return time    
-}
-
-const isOpen = ref(false)
 function showSongInfo() {
-  isOpen.value = !isOpen.value
   store.commit('SET_PLAY_INFO_SHOW', !store.state.playInfoShow)
 }
 
-
-
-
-
-
-
-onBeforeUnmount(() => {
-  clearInterval(t);
-  t = null;
-})
 
 </script>
 
@@ -478,12 +456,45 @@ onBeforeUnmount(() => {
 .setting-area {
   width: 35vw;
   .setting-btns {
-    padding: 10px 20px 10px 10px;
+    width: 100%;
+    padding: 0 25px;
+    i {
+      margin-left: 15px;
+    }
   }
-  // padding: 10px 20px 10px 10px;
   .icon-shengyin01-xianxing,
   .icon-shengyin04-xianxing {
     font-size: 18px;
+  }
+
+  .play-list-area {
+    width: 415px;
+    height: calc(100vh - 110px);
+    background: #fff;
+    right: 0px;
+    bottom: 60px;
+  }
+  .play-list-area .title {
+    padding: 20px 20px 0;
+    h3 {
+      font-weight: bold;
+    }
+  }
+  .play-list-area .play-list-btns {
+    font-size: 13px;
+    .btn {
+      margin-left: 20px;
+    }
+    .clear-btn {
+      color: #3360AF;
+      cursor: pointer;
+      &:hover {
+        color: #1901c7;
+      }
+    }
+    .icon-xinjianwenjianjia {
+      vertical-align: bottom;
+    }
   }
 }
 
@@ -536,7 +547,7 @@ onBeforeUnmount(() => {
 
 .volume-area {
   position: relative;
-  padding-top: 10px;
+  // padding-top: 10px;
   .volume-bar {
     display: none;
     position: absolute;
@@ -602,8 +613,23 @@ onBeforeUnmount(() => {
 }
 
 .content {
-  height: 100%;
+  height: calc(100% - 85px);
   width: 100%;
   overflow-y: auto;
+  tbody tr:nth-child(odd){
+    background: #fafafa;
+  }
+  tbody tr:hover {
+    background: #f2f2f3;
+  }
+  tr {
+    height: 35px;
+  }
+  td {
+    padding-left: 20px;
+    font-size: .75rem;
+    color: #424242;
+  }
+  
 }
 </style>

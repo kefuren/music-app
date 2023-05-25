@@ -1,10 +1,13 @@
 <template>
   <div>
+    <!-- 红绿灯 -->
     <TrafficLight />
+    <!-- 全屏显示 -->
     <div v-show="isFullScreen">
       <FullScreenPage />
     </div>
-    <div v-show="!hideSide && !isFullScreen">
+
+    <div v-show="!isFullScreen">
       <Header />
       <SideBar />
       <div class="page-board">
@@ -14,11 +17,6 @@
       </div>
       <Footer />
     </div>
-    <!-- <div v-show="hideSide">
-      <Header />
-      <div class="">无侧边栏显示</div>
-      <Footer />
-    </div> -->
   </div>
 </template>
 
@@ -35,15 +33,18 @@ import { onMounted, ref } from 'vue';
 const store = useStore();
 
 const isFullScreen = ref(false);
-const hideSide = ref(false);
 
 onMounted(() => {
-  window.electronAPI.enterFullScreen(() => {
-    isFullScreen.value = true
-  })
-  window.electronAPI.leaveFullScreen(() => {
-    isFullScreen.value = false
-  })
+  try {
+    window.electronAPI.enterFullScreen(() => {
+      isFullScreen.value = true
+    })
+    window.electronAPI.leaveFullScreen(() => {
+      isFullScreen.value = false
+    })
+  } catch (error) {
+    
+  }
 })
 
 

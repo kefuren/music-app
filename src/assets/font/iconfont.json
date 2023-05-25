@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7594083",
+      "name": "24gl-repeat2",
+      "font_class": "24gl-repeat2",
+      "unicode": "ea75",
+      "unicode_decimal": 60021
+    },
+    {
+      "icon_id": "7594088",
+      "name": "24gl-repeatOnce2",
+      "font_class": "24gl-repeatOnce2",
+      "unicode": "ea76",
+      "unicode_decimal": 60022
+    },
+    {
+      "icon_id": "7594161",
+      "name": "24gf-playlist3",
+      "font_class": "24gf-playlist3",
+      "unicode": "ea84",
+      "unicode_decimal": 60036
+    },
+    {
       "icon_id": "991960",
       "name": "菜单",
       "font_class": "caidan",

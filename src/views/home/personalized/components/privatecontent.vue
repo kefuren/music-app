@@ -8,19 +8,24 @@
       :showCount="false"
       :showPlayBtn="false"
       :ellipsisLines="2"
-      @onClick="onCardClick"
+      @onClick="goMvDetail(item)"
     />
   </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import Card from '@/components/card/card.vue'
 
 const props = defineProps({
   list: Array
 })
 
-const onCardClick = () => {}
+const router = useRouter();
+
+const goMvDetail = (item) => {
+  router.push(`/mv/${item.id}`)
+}
 
 </script>
 

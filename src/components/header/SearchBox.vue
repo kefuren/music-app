@@ -73,12 +73,12 @@ const checkedItem = (item) => {
 <style lang="scss" scoped>
 .search {
   display: flex;
-  align-items: center;
-  background: rgba(220, 220, 220, 0.5);
   width: 150px;
   height: 24px;
   padding: 0 5px;
   font-size: 12px;
+  align-items: center;
+  background: rgba(220, 220, 220, 0.5);
   color: #333;
   border-radius: 30px;
   overflow: hidden;

@@ -14,12 +14,12 @@
         <span>{{ numberFormat(item.playCount) }}</span>
       </div>
       <img 
-        v-lazy="item.sPicUrl || item.picUrl || item.coverImgUrl"
-        :key="item.sPicUrl || item.picUrl || item.coverImgUrl"
+        v-lazy="item.sPicUrl || item.picUrl || item.coverImgUrl || item.cover"
       >
       <div 
         v-if="showPlayBtn && item.hover"
         class="card__play-btn absolute" 
+        :class="playBtnClass"
         @click.stop="play(item)"
       >
         <i class="iconfont icon-bofang1"></i>
@@ -73,12 +73,14 @@ const props = defineProps({
     type: Number,
     default: 3,
     required: false
-  }
+  },
+  playBtnCenter: Boolean
 })
 
 const item = ref(props.item);
 const cardWrapClasses = computed(() => props.square ? 'card--square' : '');
-const ellipsisClass = computed(() => 'ellipsis-' + props.ellipsisLines + '-lines')
+const ellipsisClass = computed(() => props.ellipsisLines == 1 ? 'ellipsis' : 'ellipsis-' + props.ellipsisLines + '-lines')
+const playBtnClass = computed(() => props.playBtnCenter ? 'play-btn-center' : '')
 
 const onMouseenter = (item) => {
   props.showPlayBtn && (item.hover = true)

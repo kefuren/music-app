@@ -1,16 +1,20 @@
 <template>
-  <div class="link-title">
+  <div class="link-title flex justify-between items-center">
     <router-link :to="to">
       <span class="title"><slot></slot></span>
       <i class="iconfont icon-xiangyoujiantou"></i>
     </router-link>
+    <slot name="tagsSlot"></slot>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const props = defineProps(['title', 'to'])
 
+const props = defineProps({
+  title: String,
+  to: [ String, Object ]
+})
 </script>
 
 <style lang="scss" scoped>

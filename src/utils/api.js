@@ -129,3 +129,42 @@ export function debounce (fn, time, triggerNow) {
       }
   }
 }
+
+export function secondToDate(second) {
+  var h = Math.floor(second / 3600),
+      m = Math.floor((second / 60 % 60)),
+      s = Math.floor((second % 60)),
+      time = '';
+
+  if (h == 0) {
+    if (m >= 10) {
+      if (s >= 10) {
+        time = m + ':' + s;
+      } else {
+        time = m + ':0' + s;
+      }
+    } else {
+      if (s >= 10) {
+        time = '0' + m + ':' + s;
+      } else {
+        time = '0' + m + ':0' + s;
+      }
+    }
+  } else {
+    if (m >= 10) {
+      if (s >= 10) {
+        time = h + ':' + m + ':' + s
+      } else {
+        time = h + ':' + m + ':0' + s
+      }
+    } else {
+      if (s >= 10) {
+        time = h + ':0' + m + ':' + s
+      } else {
+        time = h + ':0' + m + ':0' + s
+      }
+    }
+  }
+
+  return time;
+}

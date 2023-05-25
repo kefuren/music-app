@@ -4,7 +4,8 @@ const playlistRouters = [
     name: 'playlist',
     component: () => import('../views/playlist/index.vue'),
     meta: {
-      title: "歌单"
+      title: "歌单",
+      link: '/playlist'
     },
   },
   {
@@ -12,7 +13,8 @@ const playlistRouters = [
     component: () => import("@/views/playlist/highquality.vue"),
     name: "playlist-highquality",
     meta: {
-      title: "精品歌单"
+      title: "精品歌单",
+      link: '/playlist'
     },
   },
   {

@@ -6,7 +6,7 @@
       class="subscribed flex items-center"
     >
       <div class="avatar">
-        <img :src="item.avatarUrl" alt="">
+        <img v-lazy="item.avatarUrl" alt="">
       </div>
       <div class="user">
         <p class="name">

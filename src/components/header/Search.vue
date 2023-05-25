@@ -151,7 +151,7 @@ function highlight(text, keyword) {
   width: 340px;
   height: calc(100% - 111px);
   background: #fff;
-  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+  box-shadow: 0 -2px 5px #0000001f;
 }
 .search {
   width: 100%;

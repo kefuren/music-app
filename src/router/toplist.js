@@ -4,7 +4,8 @@ const toplistRouters = [
     name: 'Toplist',
     component: () => import('../views/home/toplist/toplist.vue'),
     meta: {
-      title: "排行榜"
+      title: "排行榜",
+      link: '/toplist'
     },
   },
 ]

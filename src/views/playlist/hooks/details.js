@@ -1,6 +1,6 @@
 import { reactive, watchEffect } from 'vue'
 import { 
-  getPersonalizedDetailService,
+  getPlaylistDetailService,
   getTrackAllService,
   getSubscribersService,
 } from '@/services/playlist'
@@ -15,7 +15,7 @@ const detialState = reactive({
 export function useDetails(id, type) {
 
   const getDetail = () => {
-    getPersonalizedDetailService(id).then(res => {
+    getPlaylistDetailService(id).then(res => {
       detialState.details = res.playlist;
       getTrackAll({ id: detialState.details.id });
       getSubscribers({ id: detialState.details.id })

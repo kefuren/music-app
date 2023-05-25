@@ -4,7 +4,8 @@ const djRouters = [
     name: 'DJ',
     component: () => import('../views/dj/index.vue'),
     meta: {
-      title: "播客"
+      title: "播客",
+      link: ''
     },
   },
 ]

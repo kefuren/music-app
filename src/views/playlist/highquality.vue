@@ -1,8 +1,8 @@
 <template>
     <div class="page">
       <h4 class="title">精品歌单</h4>
-      <div class="flex">
-        <div class="card flex" :class="cardClass" v-for="item in highquality" :key="item.id">
+      <div class="flex card-list">
+        <div class="card flex" v-for="item in highquality" :key="item.id">
           <div class="cover relative-position text-link" @click="goRouter(item)">
             <div 
               class="card__playcount absolute text-caption">
@@ -37,21 +37,16 @@
 <script setup>
 import { onMounted, ref, computed } from "vue";
 import { useRouter } from 'vue-router'
-import { numberFormat, throttle } from '@/utils/api'
+import { numberFormat } from '@/utils/api'
 
 const router = useRouter();
 
 const highquality = ref([]);
 const highqualityTags = ref([]);
 
-const rowNum = ref(2);
-const cardClass = computed(() => 'col-' + rowNum.value);
-
 onMounted(async () => {
   highquality.value = JSON.parse(decodeURIComponent(sessionStorage.getItem('highquality'))) || []
   highqualityTags.value = JSON.parse(decodeURIComponent(sessionStorage.getItem('highqualityTags'))) || [];
-
-  window.onresize = throttle(setRowNum, 500);
 })
 
 const goRouter = (item) => {
@@ -59,11 +54,6 @@ const goRouter = (item) => {
     path: `/playlist/${item.id}`,
     query: { type: '精品歌单' }
   })
-}
-
-function setRowNum() {
-  let cw = document.documentElement.clientWidth;
-  rowNum.value = cw > 1250 ? 3 : 2;
 }
 </script>
 
@@ -148,6 +138,21 @@ function setRowNum() {
       font-size: 12px;
       color: #cdcdcd;
     }
+  }
+}
+
+.card-list {
+  margin-left: -18px;
+}
+
+.card {
+  width: 50%;
+  padding-left: 18px;
+}
+
+@media (min-width: 1250px) {
+  .card {
+    width: 33.3%;
   }
 }
 </style>

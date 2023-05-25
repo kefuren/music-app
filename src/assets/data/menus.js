@@ -61,7 +61,20 @@ export default [
 			},
 			{
 				name: 'MV',
-				path: '/mv'
+				path: '/mv',
+			}
+		]
+	},
+	{
+		title: '全部MV',
+		icon: '',
+		link: '/mv-list',
+		hidden: true,
+		topMenus: [
+			{
+				name: '全部MV',
+				path: '/mv-list',
+				hidden: true
 			}
 		]
 	},

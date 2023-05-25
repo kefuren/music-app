@@ -6,9 +6,9 @@
       />
       <CatTabs :data="playListState.listHot" />
 
-      <div class="flex">
+      <div class="flex card-list">
         <card
-          :class="cardClass"
+          class="card"
           v-for="item in playListState.playlist"
           :key="item.id"
           :item="item"
@@ -23,7 +23,6 @@
 import { ref, provide, onMounted, computed } from "vue";
 import { useRouter } from 'vue-router'
 import { usePlayList } from './hooks/playlist'
-import { throttle } from '@/utils/api'
 
 import HighqualityEntrance from './components/HighqualityEntrance.vue'
 import CatTabs from './components/CatTabs.vue'
@@ -33,15 +32,8 @@ const router = useRouter();
 
 const { playListState, changeTag } = usePlayList();
 
-const rowNum = ref(4);
-const cardClass = computed(() => 'col-' + rowNum.value);
-
 provide('playlistMethods', {
   changeTag
-})
-
-onMounted(() => {
-  window.onresize = throttle(setRowNum, 500);
 })
 
 const goHighquality = (path) => {
@@ -60,13 +52,21 @@ const goPlaylistDetial = (item) => {
     }
   })
 }
-
-function setRowNum() {
-  let cw = document.documentElement.clientWidth;
-  rowNum.value = cw > 1050 ? 5 : 4;
-}
 </script>
 
 <style lang="scss" scoped>
+.card-list {
+  margin-left: -18px;
+}
 
+.card {
+  width: 25%;
+  padding-left: 18px;
+}
+
+@media (min-width: 1060px) {
+  .card {
+    width: 20%;
+  }
+}
 </style>

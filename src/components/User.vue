@@ -54,11 +54,16 @@ const showUserList = ref(false);
 const userListStyle = ref('');
 
 onMounted(() => {
-	window.electronAPI.handleCounter((event, value) => {
-		if (value == 'ok') {
-			store.commit('SET_USER_INFO', JSON.parse(localStorage.getItem('vuex')).userInfo);
-		}
-	})
+	try {
+		window.electronAPI.handleCounter((event, value) => {
+			if (value == 'ok') {
+				store.commit('SET_USER_INFO', JSON.parse(localStorage.getItem('vuex')).userInfo);
+			}
+		})
+	} catch(e) {
+
+	}
+	
 
 	document.addEventListener('click', function(e) {
 		showUserList.value = false;
