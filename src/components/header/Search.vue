@@ -4,7 +4,7 @@
       <template v-if="!searchWord">
         <div class="search-history" v-if="searchHistory.length">
           <div class="title">搜索历史<i class="iconfont icon-lajitong text-link" @click="clearSearch"></i></div>
-          <div class="search-tags flex">
+          <div class="search-tags flex" ref="searchTagsRef">
             <div class="tag-item" v-for="item in searchHistory" :key="item.searchWord">
               {{ item.searchWord }}
             </div>
@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, watchEffect } from "vue";
+import { computed, nextTick, ref, watch, watchEffect } from "vue";
 import { getSearchHotService, getSearchSuggestService } from '@/services/search'
 import { debounce } from '@/utils/api'
 import { useStore } from 'vuex'
@@ -83,11 +83,12 @@ const props = defineProps({
     default: ""
   }
 })
-const store = useStore()
+const store = useStore();
 
 const hotData = ref(null);
 const suggestData = ref({});
-const searchHistory = computed(() => store.state.searchHistory)
+const searchHistory = computed(() => store.state.searchHistory);
+const searchTagsRef = ref(null);
 
 const orderMap = ref({
   songs: {
@@ -119,7 +120,8 @@ const search = debounce(async (keyword) => {
 }, 800);
 
 const onClick = (item) => {
-  emits('onClick', item)
+  store.commit('SET_SEARCH_HISTORY', item);
+  emits('onClick', item);
 }
 
 const clearSearch = () => {
@@ -164,8 +166,10 @@ function highlight(text, keyword) {
     }
     .search-tags {
       width: 100%;
+      max-height: 60px;
       padding: 0 10px;
       margin-bottom: 15px;
+      overflow: hidden;
     }
     .search-tags .tag-item {
       height: 25px;

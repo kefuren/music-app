@@ -2,13 +2,14 @@
   <div class="card relative-position" :class="cardWrapClasses">
     <div 
       class="card__img-container"
+      :style="cardImgContainerStyle"
       @mouseenter="onMouseenter(item)"
       @mouseleave="onMouseleave(item)"
       @click.prevent="onClick(item)"
     >
       <div 
         class="card__playcount absolute text-caption" 
-        v-if="showCount"
+        v-if="item.playCount && showCount"
       >
         <i class="iconfont icon-24gl-play"></i>
         <span>{{ numberFormat(item.playCount) }}</span>
@@ -74,14 +75,16 @@ const props = defineProps({
     default: 3,
     required: false
   },
-  playBtnCenter: Boolean
+  playBtnCenter: Boolean,
+  paddingTop: String
 })
 
 const item = ref(props.item);
 const cardWrapClasses = computed(() => props.square ? 'card--square' : '');
-const ellipsisClass = computed(() => props.ellipsisLines == 1 ? 'ellipsis' : 'ellipsis-' + props.ellipsisLines + '-lines')
-const playBtnClass = computed(() => props.playBtnCenter ? 'play-btn-center' : '')
+const ellipsisClass = computed(() => props.ellipsisLines == 1 ? 'ellipsis' : 'ellipsis-' + props.ellipsisLines + '-lines');
+const playBtnClass = computed(() => props.playBtnCenter ? 'play-btn-center' : '');
 
+const cardImgContainerStyle = computed(() => props.paddingTop ? `padding-top:${ props.paddingTop } ` : '');
 const onMouseenter = (item) => {
   props.showPlayBtn && (item.hover = true)
 }

@@ -10,11 +10,13 @@
             {{ item.name }}
           </link-title>
 
+        <keep-alive>
           <component
             :is="compList[item.key]"
             :list="state[item.key]"
             v-if="isRenderFinish"
           ></component>
+        </keep-alive>
         </div>
       </template>
       <div class="lodding flex justify-center items-center" v-else>

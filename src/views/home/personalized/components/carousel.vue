@@ -2,6 +2,7 @@
   <div class="carousel">
    <div 
       class="carousel__slides-container"
+      ref="slidesContainerRef"
       @mouseenter="carouselArrowShow = true"
       @mouseleave="carouselArrowShow = false"
     >
@@ -61,6 +62,8 @@ import { onMounted, ref, watch, onBeforeUnmount, computed } from "vue";
 const props = defineProps({
   list: Array
 })
+
+const slidesContainerRef = ref(null)
 
 const curIndex = ref(0);
 const carouselArrowShow = ref(false);

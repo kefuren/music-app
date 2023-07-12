@@ -65,7 +65,7 @@ const setSearchShow = (e, isShow) => {
 
 const checkedItem = (item) => {
   keyword.value = item.searchWord;
-  store.commit('SET_SEARCH_HISTORY', item)
+  // store.commit('SET_SEARCH_HISTORY', item)
   router.push('/search');
 }
 </script>

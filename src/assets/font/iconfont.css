@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4035278 */
-  src: url('iconfont.woff2?t=1684930873504') format('woff2'),
-       url('iconfont.woff?t=1684930873504') format('woff'),
-       url('iconfont.ttf?t=1684930873504') format('truetype');
+  src: url('iconfont.woff2?t=1685114119139') format('woff2'),
+       url('iconfont.woff?t=1685114119139') format('woff'),
+       url('iconfont.ttf?t=1685114119139') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-w_shipin:before {
+  content: "\e675";
 }
 
 .icon-24gl-repeat2:before {

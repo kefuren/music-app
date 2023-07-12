@@ -1,16 +1,24 @@
 <template>
   <div class="page-container">
-    video
+    <CatTabs :data="catList" v-model="currentCat" />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
-import { getVideoGroupListService, getVideoService } from '../../services/video'
+import { getVideoTimelineAllService, getVideoCategoryService } from '../../services/video'
+
+import CatTabs from '../../components/CatTabs.vue'
+
+const catList = ref([])
+const currentCat = ref('现场')
 
 
-onMounted(() => {
-  
+onMounted(async () => {
+  await getVideoCategoryService().then(res => {
+    console.log(res)
+    catList.value = res.data
+  })
 })
 
 </script>

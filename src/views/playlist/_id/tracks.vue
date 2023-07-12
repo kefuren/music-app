@@ -3,11 +3,11 @@
     <table>
       <thead>
         <tr>
-          <td style="width: 100px;"></td>
-          <td style="width: 260px">音乐标题</td>
+          <td style="width: 90px;"></td>
+          <td style="width: 270px">音乐标题</td>
           <td style="width: 120px">歌手</td>
           <td style="width: 150px">专辑</td>
-          <td style="width: 100px;">时长</td>
+          <td style="width: 90px;">时长</td>
         </tr>
       </thead>
       <tbody>
@@ -49,12 +49,18 @@
               <span><i class="iconfont icon-xiazai1 text-link"></i></span>
             </div>
           </td>
-          <td>
-            <span :class="{'play-text': item.play}">{{ item.name }}</span>
-            <span 
-              class="text-gray-3 alia" 
-              v-if="item.alia.length"
-            >({{ item.alia[0] }})</span>
+          <td class="flex items-center no-wrap">
+            <div class="ellipsis" style="max-width:90%">
+              <span :class="{ 'play-text': item.play }" :style="`color:${ item.noCopyrightRcmd ? '#cacaca' : '' }`">{{ item.name }}</span>
+              <span 
+                class="text-gray-3 alia" 
+                v-if="item.alia.length || item.tns"
+              >({{ item.alia[0] || item.tns[0] }})</span>
+            </div>
+            <span class="quality" v-if="!item.noCopyrightRcmd && (item.hr || item.sq)">{{ qualityMap(item) }}</span>
+            <router-link v-if="item.mv" :to="{ path: `/mv/${item.mv}` }">
+              <i class="iconfont icon-zhongxinshipin" :style="`color:${ item.noCopyrightRcmd ? '#cacaca' : '' }`"></i>
+            </router-link>
           </td>
           <td>
             <template v-for="(artist, index) in item.ar" :key="index">
@@ -99,6 +105,14 @@ const store = useStore();
 
 const tracks = computed(() => props.data);
 const curPlayId = ref('');
+const qualityMap = computed(() => (item) => {
+  if (item.hr) {
+    return 'Hi-Res'
+  }
+  if (item.sq) {
+    return 'SQ'
+  }
+})
 
 const onDblclick = async (item) => {
   if (curPlayId.value == item.id) {
@@ -187,6 +201,7 @@ table {
     background: #f2f2f3;
   }
   tbody td {
+    height: inherit;
     word-break:keep-all;/* 不换行 */
     white-space:nowrap;/* 不换行 */
     overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
@@ -208,6 +223,21 @@ table {
 }
 .text-gray-3 {
   color: #999;
+}
+.quality {
+  display: inline-block;
+  padding: 0 2px;
+  margin-left: 5px;
+  color: red;
+  font-size: 10px;
+  line-height: 11px;
+  border: solid 1px rgba(255, 0, 0, .3);
+  border-radius: 3px;
+}
+.icon-zhongxinshipin {
+  font-size: 20px;
+  color: #c3473a;
+  cursor: pointer;
 }
 .alia {
   margin-left: 5px;

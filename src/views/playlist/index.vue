@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, provide, onMounted, computed } from "vue";
+import { onActivated, ref, provide, onMounted, computed } from "vue";
 import { useRouter } from 'vue-router'
 import { usePlayList } from './hooks/playlist'
 
@@ -52,6 +52,10 @@ const goPlaylistDetial = (item) => {
     }
   })
 }
+
+onActivated(() => {
+  console.log('actived')
+})
 </script>
 
 <style lang="scss" scoped>

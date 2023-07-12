@@ -30,8 +30,8 @@
               <p class="text-link ellipsis">{{ cItem.name }}</p>
               <p class="ellipsis">
                 <template v-for="(artist, index) in cItem.artists" :key="index">
-                <span class="separator" v-if="index !== 0">/</span>
-                <span class="text-link ellipsis artist">{{ artist.name }}</span>
+                  <span class="separator" v-if="index !== 0">/</span>
+                  <span class="text-link ellipsis artist">{{ artist.name }}</span>
                 </template>
               </p>
             </template>

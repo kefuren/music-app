@@ -189,7 +189,7 @@ onMounted(() => {
   if (localStorage.getItem('vuex') !== null) {
     let store = JSON.parse(localStorage.getItem('vuex'));
     setVolume(Number(store.volume), true);
-    playProgressRef.value.style.width = (Number(store.currentTime) / (store.currentPlaying.duration / 1000)) * 100 + '%';
+    source.url && (playProgressRef.value.style.width = (Number(store.currentTime) / (store.currentPlaying.duration / 1000)) * 100 + '%');
     audioRef.value.currentTime = currentTime.value;
     audioRef.value.pause();
   }
@@ -547,13 +547,14 @@ function showSongInfo() {
 
 .volume-area {
   position: relative;
-  // padding-top: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
   .volume-bar {
     display: none;
     position: absolute;
     bottom: 30px;
     right: -4px;
-    z-index: 1;
+    z-index: 2;
     width: 30px;
     height: 100px;
     padding: 12px 0;

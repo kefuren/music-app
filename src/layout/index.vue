@@ -1,15 +1,10 @@
 <template>
-  <div v-if="true">
+  <div>
     <Header />
     <SideBar />
     <PageBoard>
       <router-view></router-view>
     </PageBoard>
-    <Footer />
-  </div>
-  <div v-else>
-    <Header />
-    <div class="">无侧边栏显示</div>
     <Footer />
   </div>
 </template>

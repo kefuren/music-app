@@ -47,7 +47,7 @@ export default {
     }
     const index = state.searchHistory.findIndex(item => item.searchWord == payload.searchWord)
     if (index == -1) {
-      state.searchHistory.push(payload)
+      state.searchHistory.unshift(payload)
     }
   }
 }

@@ -68,7 +68,7 @@ export function numberFormat(value = 0) {
     param.value = ((value / Math.pow(k, i))).toFixed(0);
     param.unit = sizes[i];
   }
-  var val = param.value + param.unit
+  let val = param.value + param.unit
 
   return val
 }
@@ -82,11 +82,11 @@ export function nameFormat(artists, token) {
 }
 
 export function throttle (fn, delay) {
-  var t = null,
+  let t = null,
     begin = new Date().getTime();
 
   return function () {
-    var _self = this,
+    let _self = this,
         args = arguments,
         cur = new Date().getTime();
 
@@ -104,7 +104,7 @@ export function throttle (fn, delay) {
 }
 
 export function debounce (fn, time, triggerNow) {
-  var t = null;
+  let t = null;
 
   return function () {
       const _self = this,
@@ -131,7 +131,7 @@ export function debounce (fn, time, triggerNow) {
 }
 
 export function secondToDate(second) {
-  var h = Math.floor(second / 3600),
+  let h = Math.floor(second / 3600),
       m = Math.floor((second / 60 % 60)),
       s = Math.floor((second % 60)),
       time = '';

@@ -1,7 +1,7 @@
 <template>
   <div class="cat-tabs flex items-center justify-between">
     <div class="cat-btn flex justify-center items-center">
-      <span class="">{{ curTag}}</span>
+      <span class="">{{ modelValue }}</span>
       <i class="iconfont icon-xiangyoujiantou"></i>
     </div>
     
@@ -23,8 +23,10 @@
 <script setup>
 import { ref, computed } from "vue";
 
+const emit = defineEmits(['onUpdate:modelValue']);
 const props = defineProps({
   data: Array,
+  modelValue: String,
 })
 
 const tags = computed(() => props.data);
@@ -33,6 +35,7 @@ const curTag = ref('');
 
 const onChangeTag = (tag) => {
   curTag.value = tag.name;
+  emit('update:modelValue', tag.name);
 }
 
 

@@ -22,7 +22,8 @@ const routes = [
         name: 'playlist',
         component: () => import('../views/playlist/index.vue'),
         meta: {
-          title: "歌单"
+          title: "歌单",
+          keepAlive: true
         },
       },
       {
@@ -30,7 +31,8 @@ const routes = [
         component: () => import("@/views/playlist/highquality.vue"),
         name: "playlist-highquality",
         meta: {
-          title: "精品歌单"
+          title: "精品歌单",
+          keepAlive: true
         },
       },
       {
@@ -43,7 +45,8 @@ const routes = [
         name: 'Toplist',
         component: () => import('../views/home/toplist/toplist.vue'),
         meta: {
-          title: "排行榜"
+          title: "排行榜",
+          keepAlive: true
         },
       },
       {
@@ -51,7 +54,8 @@ const routes = [
         name: 'Artist',
         component: () => import('../views/home/artist/artist.vue'),
         meta: {
-          title: "歌手"
+          title: "歌手",
+          keepAlive: true
         },
       },
       {
@@ -59,7 +63,8 @@ const routes = [
         name: 'Newsong',
         component: () => import('../views/home/newsong/newsong.vue'),
         meta: {
-          title: "最新音乐"
+          title: "最新音乐",
+          keepAlive: true
         },
       },
       {
